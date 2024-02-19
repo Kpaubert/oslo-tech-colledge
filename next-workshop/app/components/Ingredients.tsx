@@ -17,9 +17,9 @@ export default function Ingredients({
 
   return (
     <div>
-      {ingredients.map((ingredient, index) => {
+      {ingredients.map((ingredient) => {
         return (
-          <div key={index}>
+          <div key={ingredient}>
             <span>{ingredient}</span>
             <button onClick={() => removeIngredient(ingredient)}>Remove</button>
           </div>

@@ -5,15 +5,21 @@ import Ingredients from './components/Ingredients';
 import { FormEvent, useEffect, useState } from 'react';
 import RecipeGPT from './components/RecipeGPT';
 
+type IngredientForm = {
+  target: {
+    ingredient: {
+      value: string;
+    };
+  };
+} & FormEvent;
+
 export default function Home() {
   const text = 'TechCollEDGE cookbook';
 
   const [recipeString, setRecipeString] = useState('');
   const [ingredients, setIngredients] = useState<Array<string>>([]);
 
-  const addIngredient = (
-    event: FormEvent & { target: { ingredient: { value: string } } }
-  ) => {
+  const addIngredient = (event: IngredientForm) => {
     event.preventDefault();
     if (!event.target.ingredient) return;
     const val = event.target.ingredient.value.trim();
