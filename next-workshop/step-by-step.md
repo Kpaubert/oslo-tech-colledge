@@ -350,3 +350,129 @@ return (
 ```
 
 </details>
+
+With all this in place, the user can add and remove ingredients from a list. The next step is to hook this up with ChatGPT and make it fully functioning!
+
+## Step 6: Creating the assistant
+
+The assistant is what makes the application interesting, and it's time implement it. We will provide some code to take care of the API calls, and your job is to request new recipes and list the answers.
+
+Use the following code as a template for the file `RecipeGTP.tsx`:
+
+```jsx
+/* app/components/RecipeGPT.tsx */
+
+'use client';
+
+import { useChat } from 'ai/react';
+import { useEffect } from 'react';
+
+interface RecipeGPTProps {
+  recipe: string;
+}
+
+export default function RecipeGPT({ recipe }: RecipeGPTProps) {
+  const { messages, setInput, handleSubmit } = useChat({
+    initialMessages: [
+      {
+        id: '-1',
+        role: 'system',
+        content:
+          'You are a recipe assistant. You create recipes with the ingredients that the user provides. You assume the user has access to salt, pepper, water, and other standard kitchen supplies. You also assume the user has standard kitchen utensils.',
+      },
+    ],
+  });
+
+  useEffect(() => {
+    setInput(() => recipe);
+  }, [recipe]);
+
+  return (
+    /*
+    <Your code here>
+    */
+  )
+}
+```
+
+Much like in the `Ingredients` component, we want to list the messages, as well as submitting the recipe through a form. It can be helpful looking at <a href="https://www.npmjs.com/package/ai">the package used</a> to see the documentation.
+
+### Task H: Implement the visuals of `RecipeGPT`
+
+<details>
+<summary>Example solution Task H</summary>
+
+```jsx
+/* app/components/RecipeGPT.tsx */
+
+/* ... */
+return (
+  <div>
+    {messages.map(
+      (m) =>
+        m.role !== 'system' && (
+          <div
+            key={m.id}
+            style={{ whiteSpace: 'pre-wrap' }}
+          >
+            {m.role}: {m.content}
+          </div>
+        )
+    )}
+
+    <form onSubmit={handleSubmit}>
+      <button type='submit'>Ask for recipe</button>
+    </form>
+  </div>
+);
+/* ... */
+```
+
+</details>
+
+### Creating an endpoint
+
+Upon submitting the messages, a post request is sent to `localhost:3000/api/chat`, which we have not yet created. Create a file called `route.ts` in the path `app/api/chat` and fill it with the following code:
+
+```ts
+/* app/api/chat/route.ts */
+
+import OpenAI from 'openai';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { NextRequest } from 'next/server';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+export const runtime = 'edge';
+
+export async function POST(req: NextRequest) {
+  const { messages } = await req.json();
+  const response = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    stream: true,
+    messages,
+  });
+  const stream = OpenAIStream(response);
+  return new StreamingTextResponse(stream);
+}
+```
+
+This is an endpoint on the server which the website will request upon clicking submit. The client sends the messages that have been exchanged so far, and OpenAI's ChatGPT will stream a reply back to the user.
+
+## Step 7: Finishing and fine tuning
+
+Now that we have a finished product, we can let it live on as is, or try to improve on it. In the next lesson, you will learn how to style the website using TailwindCSS, which can make it look a lot better than it currently does.
+
+Here are some ideas if you want to improve on the solution we've made today.
+
+### Tuning the initial prompt
+
+In the file `app/components/RecipeGPT.tsx`, you see a message object in the `intialMessages` array. The `content` of this message is the initial prompt of the chatbot, and can be changed to alter its behaviour. If you for instance want it to be more aware of allergies, or only suggest meals restricted to certain dietary choices, you can adjust it.
+
+This way, you can also change the chatbot to have a completely different frame of mind. You can for instance say that the user's input are different historical events, and that the chatbot should compare or find similarities between them. There are few practical limits.
+
+A cool resource to check out is <a href="https://learnprompting.org/docs/category/-basics">LearnPrompting</a>. Here you can learn about basic prompt patterns, and more advanced prompt hacking techniques.
+
+You can also check out how Alan D. Thompson made Snapchat's My AI tell him its prompt <a href="https://lifearchitect.ai/snapchat">here</a>. This can also be of inspiration for your own prompts.
