@@ -51,7 +51,7 @@ The website currently looks like any other boilerplate NextJS project. We would 
 Your task is to create a Title component which takes a string parameter (`prop`). The value of the parameter can be anything, e.g. `<Your name>'s cookbook`.
 
 <details>
-<summary>Example solution  Task A</summary>
+<summary>Example solution Task A</summary>
 
 ```jsx
 /* app/components/Title.tsx */
@@ -96,7 +96,7 @@ To start, we'll add two states to the `page.tsx` file. It needs to store the str
 ### Task B: Add the states
 
 <details>
-<summary>Example solution  Task B</summary>
+<summary>Example solution Task B</summary>
 
 ```jsx
 /* app/page.tsx */
@@ -124,7 +124,7 @@ Now we have some reactive variables, and should make use of them. We'll start by
 ### Task C: Create the component with a form, input and button to submit
 
 <details>
-<summary>Example solution  Task C</summary>
+<summary>Example solution Task C</summary>
 
 ```jsx
 /* app/components/Ingredients.tsx */
@@ -182,7 +182,7 @@ Next, add a function that takes an event of the type `IngredientForm` as a param
 ### Task D: Implement the function called `addIngredient`
 
 <details>
-<summary>Example solution  Task D</summary>
+<summary>Example solution Task D</summary>
 
 ```jsx
 /* app/page.tsx */
@@ -219,7 +219,7 @@ Lastly in this step, we'll add a function for removing ingredients from the ingr
 ### Task E: Implement the function called `removeIngredient`
 
 <details>
-<summary>Example solution  Task E</summary>
+<summary>Example solution Task E</summary>
 
 ```jsx
 /* app/page.tsx */
@@ -254,7 +254,7 @@ To do this, we'll add an interface in `Ingredients.tsx` and add it as a paramete
 ### Task F: Allow props in `Ingredients.tsx`
 
 <details>
-<summary>Example solution  Task F</summary>
+<summary>Example solution Task F</summary>
 
 ```jsx
 /* app/components/Ingredients.tsx */
@@ -312,7 +312,7 @@ The input element needs an `onChange` handler to change the value of the `userIn
 ### Task G: Implement the aforementioned functionality
 
 <details>
-<summary>Example solution  Task G</summary>
+<summary>Example solution Task G</summary>
 
 ```jsx
 /* app/components/Ingredients.tsx */
@@ -429,6 +429,8 @@ return (
 ```
 
 </details>
+
+You also need to remember to add this component inside the root component (`page.tsx`). It takes the `recipe` (`recipeString` in `page.tsx`) as a prop.
 
 ### Creating an endpoint
 
