@@ -110,9 +110,9 @@ interface NavigationBarProps {
 export default function NavigationBar({ links }: NavigationBarProps) {
   return (
     <div>
-      {links.map((link, index) => (
+      {links.map((link) => (
         <Link
-          key={index}
+          key={link.url}
           href={link.url}
         >
           {link.title}
@@ -122,6 +122,66 @@ export default function NavigationBar({ links }: NavigationBarProps) {
   );
 }
 ```
+
+In the example above, you see the `map` function. This is a common pattern when unrolling lists to display them.
+
+<details>
+
+<summary>Explanation how how mapping works</summary>
+
+```jsx
+{
+  /* Imagine a list cars with the attributes driver, seats, horsepower. Like so: */
+}
+
+const cars = [
+{ driver: 'Jon', seats: 4, horsepower: 100 },
+{ driver: 'Jane', seats: 5, horsepower: 150 },
+];
+
+/* To display these, you could do something like this: */
+
+{
+  cars.map(
+  // mapping each individual car in a callback function
+  // the root mapped object must have a unique key
+    (car) => (
+      <div key={car.driver}>
+        <p>Driver: {car.driver}</p>
+        <p>Seats: {car.seats}</p>
+        <p>Bhp: {car.horsepower}</p>
+      </div>
+    )
+  );
+}
+
+/* You can also desctructure the object immediately */
+{
+  cars.map(({driver, seats, horsepower}) => (
+      <div key={driver}>
+        <p>Driver: {driver}</p>
+        <p>Seats: {seats}</p>
+        <p>Bhp: {horsepower}</p>
+      </div>
+    )
+  );
+}
+
+// Both examples render the same HTML:
+
+<div>
+  <p>Driver: Jon</p>
+  <p>Seats: 4</p>
+  <p>Bhp: 100</p>
+</div>
+<div>
+  <p>Driver: Jane</p>
+  <p>Seats: 5</p>
+  <p>Bhp: 150</p>
+</div>
+```
+
+</details>
 
 If you take a look at the following line:
 

@@ -4,7 +4,7 @@ Here is a step by step guide on how to implement the solution.
 
 ## Step 1 - Using Git to clone the project
 
-Firstly, you will need to _clone_ (store locally) the project locally. Although this is not strictly necessary, it is recommended so that you can jump between branches going forward.
+Firstly, you will need to _clone_ (store locally) the project. Although this is not strictly necessary, it is recommended so that you can jump between branches going forward.
 
 ### Cloning the project
 
@@ -13,7 +13,7 @@ In order to clone the project, first make sure that you have Git installed on yo
 When you have Git installed, open a terminal, navigate to the directory in which you want to store the project, and run the following command:
 
 ```bash
-> git clone https://github.com/netlight/oslo-tech-colledge.git
+> git clone https://github.com/Kpaubert/oslo-tech-colledge.git
 ```
 
 ## Step 2 - Running the project
@@ -33,12 +33,13 @@ instead of
 - `C:\Users\{username}\AppData\Roaming\npm.exe {command}`
 
 ```bash
+# To run the project:
 > cd next-workshop
 > npm install # or the shorthand 'npm i'
 > npm run dev
 ```
 
-When writing `npm run dev`, a process in the console will start, executing your program. This process will also listen to changes in your code, so when you make changes, the website will update.
+When writing `npm run dev`, a process in the console will start, executing your program. This process will also listen to changes in your code, so when you make changes, the website will update automatically (hot reload).
 
 ## Step 3 - Create a component
 
@@ -46,7 +47,7 @@ Before implementing the solution, it can be smart to take a look at [this docume
 
 ### Task A: Add a title component
 
-The website currently looks like any other boilerplate NextJS project. We would like more or less a blank slate. Find the file named `page.tsx` and remove all the markup within the `main` element, and remove the style on the `main` element.
+The website currently looks like any other boilerplate NextJS project, but with the default code removed. To start, we want to create a simple component showing the name of what we're going to create.
 
 Your task is to create a Title component which takes a string parameter (`prop`). The value of the parameter can be anything, e.g. `<Your name>'s cookbook`.
 
@@ -56,6 +57,7 @@ Your task is to create a Title component which takes a string parameter (`prop`)
 ```jsx
 /* app/components/Title.tsx */
 
+/* There are different naming conventions when using interfaces. It could also have been called ITitle. For now, name it what you prefer. The same goes for using `type` instead of `interface`. */
 interface TitleProps {
   text: string;
 }
