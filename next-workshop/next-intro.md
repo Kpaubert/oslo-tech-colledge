@@ -127,7 +127,7 @@ In the example above, you see the `map` function. This is a common pattern when 
 
 <details>
 
-<summary>Explanation how how mapping works</summary>
+<summary>Explanation how mapping works</summary>
 
 ```jsx
 {

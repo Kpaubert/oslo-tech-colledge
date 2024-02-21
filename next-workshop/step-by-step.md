@@ -480,3 +480,7 @@ This way, you can also change the chatbot to have a completely different frame o
 A cool resource to check out is <a href="https://learnprompting.org/docs/category/-basics">LearnPrompting</a>. Here you can learn about basic prompt patterns, and more advanced prompt hacking techniques.
 
 You can also check out how Alan D. Thompson made Snapchat's My AI tell him its prompt <a href="https://lifearchitect.ai/snapchat">here</a>. This can also be of inspiration for your own prompts.
+
+### Using Dall-E to imageify your recipes
+
+If you want to create AI-generated images showing the your recipes, you can use <a href="https://openai.com/dall-e-3">Dall-E</a>. Documentation can be found <a href="https://platform.openai.com/docs/guides/images/usage?context=node">here</a>, and tells you how to implement image generation.
